@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+        <meta charset='UTF-8'>
+        <title>Survey Form</title>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script type='text/javascript' src='/socket.io/socket.io.js'></script>
+        <script type ='text/javascript'>
+            $(document).ready(function (){
+            var socket = io.connect();
+            console.log('socket waiting');
+            // EMIT to server
+            $('#survey').submit(function(e) {
+                e.preventDefault();
+                socket.emit('posting_form', {
+                    name: $('#name').val(),
+                    loc: $('#loc').val(),
+                    lang: $('#lang').val(),
+                    comment: $('#comment').val()
+                });
+            });
+            // EMIT response from server
+            socket.on('updated_message', function (data) {
+                $('#message').html('You emitted the following information to the server: ' + JSON.stringify(data.response));
+            });
+            socket.on('random_number', function (data) {
+                $('#random').html('Your lucky number emitted by the server is ' + JSON.stringify(data.response));
+            });
+            });
+    </script>
+    <link rel='stylesheet' href='main.css' charset='utf-8'>   
+</head>
+<body>
+    <div id='message'></div>
+    <div id='random'></div>
+    <div class='box'>
+        <form action='' id='survey'>
+            <p>Name: <input type='text' name='name' id='name' placeholder='Name'></p>
+            <p>Dojo Location: <select name='loc' id='loc'>
+                    <option value='San Jose'>San Jose</option>
+                    <option value='Chicago'>Chicago</option>
+                    <option value='Branson'>Branson</option>
+                    <option value='Las Vegas'>Las Vegas</option>
+                </select></p>
+            <p>Favorite Language: <select name='lang' id='lang'>
+                    <option value='Python'>Python</option>
+                    <option value='Javascript'>Javascript</option>
+                    <option value='Spanish'>Spanish</option>
+                </select></p>
+            <p>Comment (optional): <textarea name='comment' id='comment' placeholder='Comment'></textarea></p>
+            <div class='button'><input type='submit' value='submit'></div></form>
+        </form>
+    </div>
+</body>
+</html>
