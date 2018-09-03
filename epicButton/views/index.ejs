@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+        <meta charset='UTF-8'>
+        <title>The great button game</title>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script type='text/javascript' src='/socket.io/socket.io.js'></script>
+        <script type ='text/javascript'>
+            $(document).ready(function (){
+                var socket = io.connect();
+                $('#push').click(function() {
+                    socket.emit('button_click');
+                });
+                socket.on('times', function(data){
+                    $('#result').html('The button has been pushed ' + JSON.stringify(data.response) + ' time(s).');
+                });
+                $('#reset').click(function() {
+                    socket.emit('reset');
+                });
+                socket.on('updatedCount', function(data) {
+                    $('#result').html('The button has been pushed 0 times.');
+                });
+            });
+        </script>
+        <style>
+            #result {font-size: 30px}
+            .epic {text-align: center;}
+            .epic input[type=submit] {background-color: purple; color: white; font-size: 24px; padding: 15px 32px;}
+            .reset {text-align: right; padding-right:50px;}
+            .reset input[type=submit] {background-color: red; color: white}
+        </style>
+</head>
+<body>
+    <div id='result' style='text-align:center'>The button has been pushed 0 times.</div>
+    <div class='epic'>
+        <p>Push the button to update the count.</p>
+        <input type='submit' id='push' name='epic' style='text-align:center'value='Push the epic button'>
+    </div>
+    <div class='reset'><input type='submit' id='reset' name='reset' value='Reset count'></div>
+</body>
+</html>
