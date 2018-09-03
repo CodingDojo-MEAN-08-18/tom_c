@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Lemur Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    </head>
+    <body class='container'>
+        <h1>Lemurs in Da House!!</h1>
+        <% for (var x of showAll) { %>
+            <p>Name:<%= x.name %></p>
+            <p>Eye color:<%= x.eye_color %></p>
+            <p>Legs:<%= x.legs %></p>
+            <a href='/lemurs/<%=x._id%>'>Show</a>
+            <hr>
+        <% } %>
+        <a href='/lemurs/new'>Add a lemur</a>
+        <% if(messages.lemurs) { %>
+            <% for (var x of messages.lemurs) { %>
+            <h3><%= x %></h3>
+            <% } %>
+        <% } %>
+    </body>
+</html>

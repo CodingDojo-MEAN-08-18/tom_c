@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>New Lemur</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    </head>
+    <body class='container'>
+        <h1>Don't be demure. Add a lemur!</h1>
+        <form action='/lemurs' method='post'>
+            <table>
+                <tr>
+                    <td>Lemur name:</td>
+                    <td><input type='text' name='name'></td>
+                </tr>
+                <tr>
+                    <td>Eye color: </td>
+                    <td><input type= 'text' name='eye_color'></td>
+                </tr>
+                <tr>
+                    <td>Legs: </td>
+                    <td><input type= 'number' name='legs'></td>
+                </tr>
+            </table>
+            <input type='submit' class="btn btn-primary" value='Add a lemur!'>
+        </form>
+        <% if(messages.lemurs) { %>
+            <% for (var x of messages.lemurs) { %>
+            <h3><%= x %></h3>
+            <% } %>
+        <% } %>
+    </body>
+</html>

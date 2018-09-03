@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Dojo Message Board</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    </head>
+    <body class='container'>
+        <h2>The Dojo Message Board</h2><hr>
+        <main>
+            <fieldset>
+                <legend>Create Message</legend>
+                <form action='/message' method='post'>
+                    <div>
+                        <label for=''>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type='text' name='name'>
+                    </div>
+                    <div>
+                        <label for=''>Message:&nbsp; </label><textarea name='message' rows='3' cols='120'></textarea>
+                    </div>
+                    <button class='btn btn-primary float-right'>Post message</button>
+                </form></p>
+                <% if (typeof(errors) !== 'undefined') { %>
+                    <% for (const key in errors) { %>
+                    <h4><%= errors[key].message %></h4>
+                    <% } %>
+                <% } else { %>
+                    <div>
+                        <% for(const message of messages) { %>
+                            <div>
+                            <h6 style='margin-left: 40px'>Name: <%= message.name %></h6>
+                            <h6 style='margin-left: 40px'>Message: <%= message.message %></h6>
+                            <% for (const comment of message.comments) { %>
+                                <h6 style='margin-left: 80px'>Name: <%= comment.name %></h6>
+                                <h6 style='margin-left: 80px'>Comment: <%= comment.comment %></h6>
+                            </div>
+                            <% } %>
+                            <form action='/comment/<%=message._id%>' method='post'>
+                                <div>
+                                    <label for='' style='margin-left: 80px'>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type='text' name='name'>
+                                </div>
+                                <div>
+                                    <label for=''style='margin-left: 80px'>Comment:&nbsp; </label><textarea name='comment' rows='3' cols='100'></textarea>
+                                </div>
+                                <button class='btn btn-primary float-right'>Post comment</button>
+                            </form></p>
+                        <% } %>
+                    </div>
+                <% } %>
+            </fieldset>
+        </main>
+    </body>
+</html>

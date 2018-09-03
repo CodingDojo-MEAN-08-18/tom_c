@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Show Lemur</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    </head>
+    <body class='container'>
+        <h1>The lemur scoop.  It's not just for poop.</h1>
+        <p>Name: <%=aLemur.name%></p>
+        <p>Eye color: <%=aLemur.eye_color%></p>
+        <p>Legs: <%=aLemur.legs%></p>
+        <p>Created at: <%=aLemur.createdAt%></p>
+        <p>Updated at: <%=aLemur.updatedAt%></p>
+        <a href='/lemurs/edit/<%=aLemur._id%>'>Edit</a>
+        <a href='/'>Home</a>
+    </body>
+</html>

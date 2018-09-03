@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Dojo Quotes</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>Here are the awesome quotes!</h1>
+        <% for (const quote of quotes) { %>
+            <p>"<%=quote.quote%>"</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <%=quote.name%> at <%=quote.createdAt%></p>
+        <% } %>
+
+        <!-- tip to easily see objects printed in full instead of [object Object] -->
+        <!-- <%- JSON.stringify(messages) %> -->
+        <!-- based on the structure of your messages, determine how to display them -->
+        <% if(messages.quoteErr) { %>
+            <% for (var x of messages.quoteErr) { %>
+            <h3><%= x %></h3>
+            <% } %>
+        <% } %>
+        <a href="/">Add more quotes</a>
+    </body>
+</html>
